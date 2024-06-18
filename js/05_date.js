@@ -7,3 +7,11 @@ let myDate = new Date()
 // console.log('\n');
 // console.log(myDate.toLocaleTimeString());
 // console.log('\n');
+
+const arr = [1, 2, 3, "Hariansh"]
+
+const arr2 = new Array(3, 4, 18)
+
+console.log(arr2)
+
+arr2.push(17)
