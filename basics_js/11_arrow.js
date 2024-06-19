@@ -10,9 +10,9 @@
 // user.welcomeMessage()
 
 const chai = () => {
-    let username = "Hariansh",
-    
+    let username = "Hariansh"
+    console.log(username);
 }
 
-// chai()
+chai()
 
