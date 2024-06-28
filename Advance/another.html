@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #212121;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            margin: 20px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        .card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .card img {
+            width: 100%;
+            height: auto;
+        }
+        .card-container {
+            padding: 16px;
+        }
+        .card-title {
+            font-size: 1.5em;
+            margin: 0;
+        }
+        .card-description {
+            font-size: 1em;
+            margin-top: 10px;
+        }
+        .button-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+    <div class='cards'></div>
+
+    <div class="button-container">
+        <button id="getDataButton">Get GitHub Data</button>
+    </div>
+    
+    <script>
+        function createCard(avatarUrl, followers) {
+            const card = document.createElement('div');
+            card.className = 'card';
+
+            const img = document.createElement('img');
+            img.src = avatarUrl;
+            img.alt = 'Avatar';
+            card.appendChild(img);
+
+            const container = document.createElement('div');
+            container.className = 'card-container';
+
+            const title = document.createElement('h2');
+            title.className = 'card-title';
+            title.textContent = 'GitHub User';
+            container.appendChild(title);
+
+            const cardDescription = document.createElement('p');
+            cardDescription.className = 'card-description';
+            cardDescription.textContent = `Followers: ${followers}`;
+            container.appendChild(cardDescription);
+
+            card.appendChild(container);
+
+            document.getElementsByClassName('cards')[0].appendChild(card);
+        }
+
+        function storeGithubData() {
+            const request = new XMLHttpRequest();
+            const requestUrl = 'https://api.github.com/users/hariansh-singh';
+            request.open('GET', requestUrl);
+            request.onreadystatechange = () => {
+                if (request.readyState === 4) {
+                    const data = JSON.parse(request.responseText);
+                    createCard(data.avatar_url, data.followers);
+                }
+            };
+            request.send();
+        }
+
+        document.getElementById('getDataButton').addEventListener('click', storeGithubData);
+    </script>
+</body>
+</html>
